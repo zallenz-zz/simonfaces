@@ -8,6 +8,8 @@ $(document).ready(function(){
     //Construct a CameraDetector and specify the image width / height and face detector mode.
     var detector = new affdex.CameraDetector(divRoot, width, height, faceMode);
 
+    var game = new Game();
+
     //Enable detection of all Expressions, Emotions and Emojis classifiers.
     detector.detectAllEmotions();
     detector.detectAllExpressions();
@@ -36,6 +38,7 @@ $(document).ready(function(){
             detector.reset();
             $('#results').html("");
         }
+        game.glowEmotion("happy");
     });
 
     //Add a callback to notify when camera access is allowed

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
     <!-- jQuery library -->
-
+    <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
@@ -14,7 +14,8 @@
     <script src="game.js"></script>
     <script src="emotion.js"></script>
     <script src="main.js"></script>
-
+    <title>Simon Faces</title>
+    <link rel ="icon" href="../assets/happy.png">
     <body>
         <div class="container-fluid">
             <div class="row">
@@ -23,7 +24,14 @@
                 <div class="col-md-4">
                     <div style="height:25em;">
                         <strong>EMOTION TRACKING RESULTS</strong>
+
                         <div id="results" style="word-wrap:break-word;"></div>
+                        <div id="emojis">
+                            <img id="happy" src="../assets/happy.png"/>
+                            <img id="sad" src="../assets/sad.png"/>                        
+                            <img id="angry" src="../assets/angry.png"/>
+                            <img id="surprise" src="../assets/surprise.png"/>
+                        </div>
                     </div>
                     <div>
                         <strong>DETECTOR LOG MSGS</strong>

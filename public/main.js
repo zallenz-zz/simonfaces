@@ -28,6 +28,7 @@ $(document).ready(function(){
         if (detector && !detector.isRunning) {
             detector.start();
         }
+        game.start();
     });
     $("#stop").click(function() {
         if (detector && detector.isRunning) {
@@ -44,8 +45,7 @@ $(document).ready(function(){
     });
 
     //Add a callback to notify when camera access is allowed
-    // detector.addEventListener("onWebcamConnectSuccess", function() {
-    // });
+    detector.addEventListener("onWebcamConnectSuccess", camSearching);
 
       //Add a callback to notify when camera access is denied
     detector.addEventListener("onWebcamConnectFailure", camFail);

@@ -1,4 +1,5 @@
-
+<!doctype html>
+<html>
     <script src="https://download.affectiva.com/js/3.2/affdex.js"> </script>
     <!-- Latest compiled and minified CSS -->
 
@@ -31,26 +32,23 @@
                             <img id="happy" src="../assets/happy.png"/>
                             <img id="sad" src="../assets/sad.png"/>                        
                             <img id="angry" src="../assets/angry.png"/>
-                            <img id="surprise" src="../assets/surprise.png"/>
+                            <img id="surprised" src="../assets/surprised.png"/>
                         </div>
                     </div>
                     <div>
                         <strong>DETECTOR LOG MSGS</strong>
                     </div>
                     <div id="logs"></div>
+                    <div id="score"></div>
+                    <div id="info"></div>
                 </div>
             </div>
             <div>
                 <button id="start">Start</button>
                 <button id="stop" >Stop</button>
                 <button id="reset">Reset</button>
-                <p>
-                    <strong>Instructions</strong>
-                    </br>
-                    Press the start button to start the detector.
-                    <br/> When a face is detected, the probabilities of the different emotions are written to the DOM.
-                    <br/> Press the stop button to end the detector.
-                </p>
+                <button id="capture">Capture</button>
             </div>
         </div>
     </body>
+</html>

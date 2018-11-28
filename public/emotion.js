@@ -7,8 +7,9 @@ Takes: JSON.stringify(faces[0].emotions, function(key, val) {
           }));
 Returns: "Happy", "Sad", "Angry", "Surprise"
 */
-function guessEmotion()
+function guessEmotion(emotions, expressions)
 {
-
+	console.log(emotions, expressions);
+	return "happy";
 
 }

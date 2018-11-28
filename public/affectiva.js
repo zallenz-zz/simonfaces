@@ -13,25 +13,29 @@ function drawFeaturePoints(img, featurePoints) {
     }
 }
 function parseFrame(faces, image, timestamp) {
-    $('#results').html("");
-    log('#results', "Timestamp: " + timestamp.toFixed(2));
-    log('#results', "Number of faces found: " + faces.length);
+    var emotions;
+    var expressions;
     if (faces.length > 0) {
-        log('#results', "Appearance: " + JSON.stringify(faces[0].appearance));
-        console.log("HERE:" + faces[0].emotions);
-        log('#results', "Emotions: " + JSON.stringify(faces[0].emotions, function(key, val) {
-            return val.toFixed ? Number(val.toFixed(0)) : val;
-        }));
-        log('#results', "Expressions: " + JSON.stringify(faces[0].expressions, function(key, val) {
-            return val.toFixed ? Number(val.toFixed(0)) : val;
-        }));
-        log('#results', "Emoji: " + faces[0].emojis.dominantEmoji);
+        JSON.stringify(faces[0].emotions, function(key, val) {
+            emotions = val.toFixed ? Number(val.toFixed(0)) : val;
+        });
+        JSON.stringify(faces[0].expressions, function(key, val) {
+            expressions = val.toFixed ? Number(val.toFixed(0)) : val;
+        });
         if ($('#face_video_canvas')[0] != null)
             drawFeaturePoints(image, faces[0].featurePoints);
     }
+    var guess = guessEmotion(emotions, expressions);
+    writeGuess(guess);
+}
+function writeGuess(guess){
+    $("#info").html("<strong>You look pretty " + guess+ " right now!</strong>");
+}
+function camSearching(){
+    $("#info").html("<strong>Searching For Your Face...</strong>");    
 }
 function camFail(){
-    console.log("web cam not enabled");
+    $("#info").html("<strong>Please Enable Your Webcam to Play!</strong>");
 }
 function log(node_name, msg) {
     $(node_name).append("<span>" + msg + "</span><br />")

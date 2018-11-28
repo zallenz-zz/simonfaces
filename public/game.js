@@ -3,10 +3,17 @@ class Game {
 		this.emotionList = [];
 		this.score = 0;
 		this.emotionList.push(this.addNewEmotion());
+		this.gameover = false;
 	}
 
-	gameStart(){
-
+	start(){
+		while(!this.gameover){
+			this.queryEmotionList();
+			this.acceptAnswers();
+		}
+	}
+	acceptAnsweers(){
+		
 	}
 	glowEmotion(face){
 		var image = $("#"+face);
@@ -32,7 +39,7 @@ class Game {
 		else if(rand == 2)
 			return "angry";
 		else
-			return "surprise";
+			return "surprised";
 	}
 
 	queryEmotionList(){
@@ -53,5 +60,13 @@ class Game {
 		var newEmotion = this.randomEmotion();
 		this.emotionList.push(newEmotion);
 		this.score++;
+		this.displayScore();
+	}
+	displayScore(){
+		var userscore = this.score - 1;
+		$("#score").html("<strong>Score: "+ userscore + "</strong>");
+	}
+	writeGuess(guess){
+		$("#info").html("<strong>You look pretty " + guess+ "right now!");
 	}
 }

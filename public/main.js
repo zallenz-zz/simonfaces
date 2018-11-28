@@ -21,7 +21,9 @@ $(document).ready(function(){
         $("#face_video_canvas").css("display", "block");
         $("#face_video").css("display", "none");
     });
-
+    $("#test").click(function(){
+        game.queryEmotionList();
+    });
     $("#start").click(function() {
         if (detector && !detector.isRunning) {
             detector.start();
@@ -38,7 +40,7 @@ $(document).ready(function(){
             detector.reset();
             $('#results').html("");
         }
-        game.glowEmotion("happy");
+        game.queryEmotionList();
     });
 
     //Add a callback to notify when camera access is allowed

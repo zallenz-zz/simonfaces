@@ -5,11 +5,11 @@ Takes: JSON.stringify(faces[0].emotions, function(key, val) {
           JSON.stringify(faces[0].expressions, function(key, val) {
             return val.toFixed ? Number(val.toFixed(0)) : val;
           }));
-Returns: "Happy", "Sad", "Angry", "Surprise"
+Returns: "happy", "sad", "angry", "surprised"
 */
 function guessEmotion(emotions, expressions)
 {
-	console.log(emotions, expressions);
+//	console.log(emotions, expressions);
 	return "happy";
 
 }

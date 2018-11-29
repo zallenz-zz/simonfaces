@@ -29,7 +29,7 @@ function parseFrame(faces, image, timestamp) {
     writeGuess(guess);
 }
 function writeGuess(guess){
-    $("#info").html("<strong>You look pretty " + guess+ " right now!</strong>");
+    //$("#info").html("<strong>" + guess + "</strong>");
 }
 function camSearching(){
     $("#info").html("<strong>Searching For Your Face...</strong>");    

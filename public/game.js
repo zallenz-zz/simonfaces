@@ -1,19 +1,43 @@
 class Game {
 	constructor(){
-		this.emotionList = [];
-		this.score = 0;
-		this.emotionList.push(this.addNewEmotion());
-		this.gameover = false;
+		this.resetGame();
 	}
 
 	start(){
-		while(!this.gameover){
-			this.queryEmotionList();
-			this.acceptAnswers();
+		this.queryEmotionList();
+		this.acceptAnswers = true;
+	}
+	checkAnswer(){
+		if(this.acceptAnswers){
+			if(this.answerProgress < this.emotionList.length-2){
+				var curremotion = this.parseEmotion();
+				console.log(curremotion, this.emotionList[this.answerProgress]);
+				if(curremotion == this.emotionList[this.answerProgress]){
+					this.answerProgress++;
+					return true;
+				}
+				else{
+					this.answerProgress = 0;
+					return false;
+				}
+			}
+			else{
+				this.answerProgress = 0;
+				return "done";
+			}
 		}
 	}
-	acceptAnsweers(){
-		
+	parseEmotion(){
+		var curremotion = $("#info > strong").html();
+		return curremotion;
+	}
+	resetGame(){
+		this.emotionList = [];
+		this.score = 0;
+		this.addNewEmotion();
+		this.gameover = false;
+		this.acceptAnswers = false;
+		this.answerProgress = 0;
 	}
 	glowEmotion(face){
 		var image = $("#"+face);
@@ -50,15 +74,17 @@ class Game {
 			game.playEmotionSound(currface);
 		    i++;
 		    if(i < game.emotionList.length)
-		        setTimeout(f, 400, game);
-		    else
+		        setTimeout(f, 1000, game);
+		    else{
 		    	game.addNewEmotion();
+		    }
 		}
 		f(this);
 	}
 	addNewEmotion(){
 		var newEmotion = this.randomEmotion();
 		this.emotionList.push(newEmotion);
+		console.log(this.emotionList);
 		this.score++;
 		this.displayScore();
 	}
@@ -66,7 +92,5 @@ class Game {
 		var userscore = this.score - 1;
 		$("#score").html("<strong>Score: "+ userscore + "</strong>");
 	}
-	writeGuess(guess){
-		$("#info").html("<strong>You look pretty " + guess+ "right now!");
-	}
+
 }

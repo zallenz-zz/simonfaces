@@ -28,14 +28,15 @@ $(document).ready(function(){
         if (detector && !detector.isRunning) {
             detector.start();
         }
-        game.start();
     });
     $("#stop").click(function() {
-        if (detector && detector.isRunning) {
-            detector.removeEventListener();
-            detector.stop();
-        }
-    });    
+        // if (detector && detector.isRunning) {
+        //     detector.removeEventListener();
+        //     detector.stop();
+        // }
+        game.start();
+
+    }); 
     $("#reset").click(function() {
         if (detector && detector.isRunning) {
             detector.reset();
@@ -43,7 +44,34 @@ $(document).ready(function(){
         }
         game.queryEmotionList();
     });
+    $("#capture").click(function(){
+        var cont = game.checkAnswer();
+        console.log(cont);
+        if(cont == "done"){
+            game.queryEmotionList();
+        }
+        else if(cont == false){
+            console.log("wrong answer");
+            game.resetGame();
 
+        }
+        else{
+            console.log("right answer");
+        }
+    });
+
+    $("#happybutton").click(function(){
+        $("#info").html("<strong>happy</strong>");
+    });
+    $("#sadbutton").click(function(){
+        $("#info").html("<strong>sad</strong>");
+    });
+    $("#angrybutton").click(function(){
+        $("#info").html("<strong>angry</strong>");
+    });
+    $("#surprisedbutton").click(function(){
+        $("#info").html("<strong>surprised</strong>");
+    });
     //Add a callback to notify when camera access is allowed
     detector.addEventListener("onWebcamConnectSuccess", camSearching);
 
@@ -58,6 +86,10 @@ $(document).ready(function(){
       //Add a callback to receive the results from processing an image.
       //The faces object contains the list of the faces detected in an image.
       //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
-    detector.addEventListener("onImageResultsSuccess", parseFrame);
+    detector.addEventListener("onImageResultsSuccess", function(faces, image, timestamp){
+        parseFrame(faces, image, timestamp);
+
+
+    });
 
 });

@@ -16,7 +16,6 @@ $(document).ready(function(){
 
     //Add a callback to notify when the detector is initialized and ready for runing.
     detector.addEventListener("onInitializeSuccess", function() {
-        //gameStart();
         //Display canvas instead of video feed because we want to draw the feature points on it
         $("#face_video_canvas").css("display", "block");
         $("#face_video").css("display", "none");
@@ -24,39 +23,24 @@ $(document).ready(function(){
     $("#test").click(function(){
         game.queryEmotionList();
     });
-    $("#start").click(function() {
+    $("#startcam").click(function() {
         if (detector && !detector.isRunning) {
             detector.start();
         }
     });
-    $("#stop").click(function() {
-        // if (detector && detector.isRunning) {
-        //     detector.removeEventListener();
-        //     detector.stop();
-        // }
+    $("#startgame").click(function() {
         game.start();
 
     }); 
-    $("#reset").click(function() {
-        if (detector && detector.isRunning) {
-            detector.reset();
-            $('#results').html("");
-        }
-        game.queryEmotionList();
-    });
+
     $("#capture").click(function(){
         var cont = game.checkAnswer();
-        console.log(cont);
         if(cont == "done"){
             game.queryEmotionList();
         }
         else if(cont == false){
-            console.log("wrong answer");
+            $("#info").html("<strong>Game Over Press Start Again</strong>");
             game.resetGame();
-
-        }
-        else{
-            console.log("right answer");
         }
     });
 
@@ -86,10 +70,6 @@ $(document).ready(function(){
       //Add a callback to receive the results from processing an image.
       //The faces object contains the list of the faces detected in an image.
       //Faces object contains probabilities for all the different expressions, emotions and appearance metrics
-    detector.addEventListener("onImageResultsSuccess", function(faces, image, timestamp){
-        parseFrame(faces, image, timestamp);
-
-
-    });
+    detector.addEventListener("onImageResultsSuccess", parseFrame);
 
 });

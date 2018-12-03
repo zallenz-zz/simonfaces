@@ -20,13 +20,14 @@ class Game {
 		if(this.acceptAnswers){
 			var curremotion = this.parseEmotion();
 			if(curremotion == this.emotionList[this.answerProgress]){
+				this.playEmotionSound(curremotion);
 				this.answerProgress++;
 				if(this.answerProgress <= this.score)
 					return true;
 				else{
 					this.score++;
 					this.answerProgress = 0;
-					return "done";					
+					return "done";			
 				}
 			}
 			else{
@@ -36,7 +37,7 @@ class Game {
 		}
 	}
 	parseEmotion(){
-		var curremotion = $("#info > strong").html();
+		var curremotion = $("#info > h1").html();
 		return curremotion;
 	}
 
@@ -50,8 +51,8 @@ class Game {
 		}, 250);
 	}
 	playEmotionSound(face){
-			var audio = new Audio("../assets/" + face + ".mp3");
-			audio.play();
+		var audio = new Audio("../assets/" + face + ".mp3");
+		audio.play();
 	}
 	randomEmotion(){
 		var rand = Math.floor(Math.random() * Math.floor(4));
@@ -88,7 +89,6 @@ class Game {
 		this.displayScore();
 	}
 	displayScore(){
-
 		$("#score").html("<strong>Score: " + this.score + "</strong>");
 	}
 

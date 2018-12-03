@@ -20,52 +20,43 @@ $(document).ready(function(){
         $("#face_video_canvas").css("display", "block");
         $("#face_video").css("display", "none");
     });
-    $("#test").click(function(){
-        game.queryEmotionList();
-    });
+
     $("#startcam").click(function() {
         if (detector && !detector.isRunning) {
             detector.start();
         }
+        $("#startcam").hide();
+        $("#startgame").show();
     });
     $("#startgame").click(function() {
         game.start();
-
+        $("#gamestate").html("");
+        $("#startgame").hide();
+        $("#capture").show();
     }); 
 
-    $("#capture").click(function(){
+    $('body').keyup(capture);
+    $("#capture").click(capture);
+
+    function capture(){
         var cont = game.checkAnswer();
         if(cont == "done"){
             game.queryEmotionList();
         }
         else if(cont == false){
-            $("#info").html("<strong>Game Over Press Start Again</strong>");
+            $("#gamestate").html("<h1>Game Over! Press Start Again</h1>");
             game.resetGame();
-        }
-    });
+            $("#startgame").show();
+            $("#capture").hide();
 
-    $("#happybutton").click(function(){
-        $("#info").html("<strong>happy</strong>");
-    });
-    $("#sadbutton").click(function(){
-        $("#info").html("<strong>sad</strong>");
-    });
-    $("#angrybutton").click(function(){
-        $("#info").html("<strong>angry</strong>");
-    });
-    $("#surprisedbutton").click(function(){
-        $("#info").html("<strong>surprised</strong>");
-    });
+        }
+    }
     //Add a callback to notify when camera access is allowed
     detector.addEventListener("onWebcamConnectSuccess", camSearching);
 
       //Add a callback to notify when camera access is denied
     detector.addEventListener("onWebcamConnectFailure", camFail);
 
-      //Add a callback to notify when detector is stopped
-    detector.addEventListener("onStopSuccess", function() {
-        $("#results").html("");
-    });
 
       //Add a callback to receive the results from processing an image.
       //The faces object contains the list of the faces detected in an image.

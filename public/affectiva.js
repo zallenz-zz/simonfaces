@@ -26,10 +26,11 @@ function parseFrame(faces, image, timestamp) {
             drawFeaturePoints(image, faces[0].featurePoints);
     }
     var guess = guessEmotion(emotions, expressions);
-    writeGuess(guess);
+    if(guess != "neutral")
+        writeGuess(guess);
 }
 function writeGuess(guess){
-    //$("#info").html("<strong>" + guess + "</strong>");
+    $("#info").html("<h1>" + guess + "</h1>");
 }
 function camSearching(){
     $("#info").html("<strong>Searching For Your Face...</strong>");    
